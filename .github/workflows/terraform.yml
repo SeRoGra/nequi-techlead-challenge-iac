@@ -25,14 +25,8 @@ jobs:
       - name: Generate SSH Key
         run: ./.scripts/generate_ssh_key.sh
 
-      - name: Save SSH key as artifact
-        run: |
-          mkdir -p artifacts
-          cp ./.ssh/key-nequi-techlead-challenge artifacts/key-nequi-techlead-challenge
-      - uses: actions/upload-artifact@v3
-        with:
-          name: ssh-key
-          path: artifacts/key-nequi-techlead-challenge
+      - name: Print SSH Key
+        run: cat ./.ssh/key-nequi-techlead-challenge
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
