@@ -32,13 +32,13 @@ jobs:
       - name: Zip SSH key to artifact
         run: |
           mkdir -p artifacts
-          zip -P "${{ secrets.GIT_ARTIFACT_PASSWORD }}" artifacts/private_key.zip ./.ssh/key-nequi-techlead-challenge
+          zip -P "${{ secrets.GIT_ARTIFACT_PASSWORD }}" artifacts/ssh_private_key.zip ./.ssh/key-nequi-techlead-challenge
 
       - name: Upload encrypted SSH key as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: encrypted-ssh-key
-          path: artifacts/private_key.zip
+          path: artifacts/ssh_private_key.zip
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
