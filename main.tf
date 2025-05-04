@@ -36,7 +36,7 @@ module "ec2" {
   monitoring             = false
   vpc_security_group_ids = [module.security_group.security_group_id]
   subnet_id              = local.subnet_id
-  user_data              = null
+  user_data              = file("./.scripts/user_data.sh")
 
   tags = local.resource_tags
 
