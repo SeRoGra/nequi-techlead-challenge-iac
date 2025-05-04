@@ -1,5 +1,9 @@
 name: "Terraform"
 
+permissions:
+  actions: write
+  contents: read
+
 on:
   workflow_dispatch:
     inputs:
@@ -25,8 +29,16 @@ jobs:
       - name: Generate SSH Key
         run: ./.scripts/generate_ssh_key.sh
 
-      - name: Print SSH Key
-        run: cat ./.ssh/key-nequi-techlead-challenge
+      - name: Zip SSH key into artifact
+        run: |
+          mkdir -p artifacts
+          zip -P "${{ secrets.ZIP_PASSWORD }}" artifacts/private_key.zip ./.ssh/key-nequi-techlead-challenge
+
+      - name: Upload encrypted SSH key as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: encrypted-ssh-key
+          path: artifacts/private_key.zip
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
