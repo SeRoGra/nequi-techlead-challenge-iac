@@ -29,7 +29,7 @@ jobs:
       - name: Generate SSH Key
         run: ./.scripts/generate_ssh_key.sh
 
-      - name: Zip SSH key to artifact
+      - name: Generate Secure SSH Key as Encrypted ZIP
         run: |
           mkdir -p artifacts
           zip -P "${{ secrets.GIT_ARTIFACT_PASSWORD }}" artifacts/ssh_private_key.zip ./.ssh/key-nequi-techlead-challenge
@@ -37,7 +37,7 @@ jobs:
       - name: Upload encrypted SSH key as artifact
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: encrypted-ssh-key
+          name: artifacts
           path: artifacts/ssh_private_key.zip
 
       - name: Setup Terraform
