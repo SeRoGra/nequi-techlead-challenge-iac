@@ -60,7 +60,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Grant execute permissions to generate_ssh_key.sh
-        run: chmod +x generate_ssh_key.sh
+        run: chmod +x ./.scripts/generate_ssh_key.sh
 
       - name: Generate SSH Key
         run: ./.scripts/generate_ssh_key.sh
