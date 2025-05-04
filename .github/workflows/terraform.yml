@@ -24,15 +24,15 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Grant execute permissions to generate_ssh_key.sh
-        run: chmod +x ./.scripts/generate_ssh_key.sh
+        run: chmod +x .scripts/generate_ssh_key.sh
 
       - name: Generate SSH Key
-        run: ./.scripts/generate_ssh_key.sh
+        run: sh .scripts/generate_ssh_key.sh
 
       - name: Generate Secure SSH Key as Encrypted ZIP
         run: |
           mkdir -p artifacts
-          zip -P "${{ secrets.GIT_ARTIFACT_PASSWORD }}" artifacts/ssh_private_key.zip ./.ssh/key-nequi-techlead-challenge
+          zip -P "${{ secrets.GIT_ARTIFACT_PASSWORD }}" artifacts/ssh_private_key.zip .ssh/key-nequi-techlead-challenge
 
       - name: Upload encrypted SSH key as artifact
         uses: actions/upload-artifact@v4.6.2
@@ -72,10 +72,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Grant execute permissions to generate_ssh_key.sh
-        run: chmod +x ./.scripts/generate_ssh_key.sh
+        run: chmod +x .scripts/generate_ssh_key.sh
 
       - name: Generate SSH Key
-        run: ./.scripts/generate_ssh_key.sh
+        run: .scripts/generate_ssh_key.sh
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
